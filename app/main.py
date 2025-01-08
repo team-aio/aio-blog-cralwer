@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 import requests
-from bs4 import BeautifulSoup
 from fastapi.responses import JSONResponse
 import feedparser
+
 app = FastAPI()
 
 @app.get("/blog/tistory/{user_id}")
@@ -16,8 +16,8 @@ async def tistory(user_id: str):
             temp_dict = {}
             temp_dict['title'] = entry["title"]
             temp_dict['link'] = entry['link']
-            temp_dict['description'] = entry['description']
-            temp_dict['published'] = entry['published']
+            temp_dict['content'] = entry['description']
+            temp_dict['posted_at'] = entry['published']
             blog_contents['contents'].append(temp_dict)
 
         return JSONResponse(content=blog_contents)
@@ -39,8 +39,8 @@ async def velog(user_id: str):
             temp_dict = {}
             temp_dict['title'] = entry["title"]
             temp_dict['link'] = entry['link']
-            temp_dict['description'] = entry['description']
-            temp_dict['published'] = entry['published']
+            temp_dict['content'] = entry['description']
+            temp_dict['posted_at'] = entry['published']
             blog_contents['contents'].append(temp_dict)
 
         return JSONResponse(content=blog_contents)
