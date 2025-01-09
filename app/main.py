@@ -2,8 +2,20 @@ from fastapi import FastAPI
 import requests
 from fastapi.responses import JSONResponse
 import feedparser
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+origins = [
+	"*"
+]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 @app.get("/blog/tistory/{user_id}")
 async def tistory(user_id: str):
